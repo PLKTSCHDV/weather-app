@@ -14,36 +14,60 @@
             align-items: center;
             flex-direction: column;
             font-weight: 100;
+            margin: 10px;
         }p{
             display: inline;
         }
     </style>
     <body>
-        <p>icon</p>
-        <h4>desc</h4>
-        <h3>Temp &degF</h3>
-        <p>Timezone</p>
+        <p style="font-size: 1.5em;font-weight: 100;"><u>Today's weather</u></p>
+        <h4 class="desc">desc</h4>
+        <h3 class="temp">Temp &degF</h3>
+        <p class="feelslike">feels like</p>
+        <p class="location">Timezone</p>
 <script>
 console.log("hello");
 window.addEventListener("load", ()=>{
     let longitude;
     let latitude;
+    let description=document.querySelector(".desc");
+    let location=document.querySelector(".location");
+    let fl=document.querySelector(".feelslike");
+    let t=document.querySelector(".temp");
+    
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(position=>{
+            console.log(position);
             longitude=position.coords.longitude;
             latitude=position.coords.latitude;
 
             const proxy="https://cors.anywhere.herokuapp.com/";
-            const api=`https://api.darksky.net/forecast/fd9d9c6418c23d94745b836767721ad1/${latitude},${longitude}`;
-            fetch(api)
-                .then(response=>{
+            const api=`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=c61cfd6165c09ed457bba964f0b9c45f`;
+           //fetch("https://ipinfo.io/json")
+                fetch(api)
+                .then(function (response) {
                     return response.json();
-                })
+                    })
+                .then(function (myJson) {
+                    
+                    console.log(myJson/*.weather[0].main*/);
+                    console.log(myJson.name);
+                    description.textContent=myJson.weather[0].main;
+                    location.textContent=myJson.name+", "+myJson.sys.country;
+                    let temp=myJson.main.temp-273.15;
+                    t.textContent=Math.round(temp)+" C";
+                    let f_l=myJson.main.feels_like-273.15;
+                    fl.textContent="feels like "+Math.round(f_l)+" C";
+                    
+                    })
+                .catch(function (error) {
+                    console.log("Error: " + error);
+                    });
         });
     }
 
     
-    
+    console.log("after");
 });
 </script>
 
