@@ -18,13 +18,18 @@
         }p{
             display: inline;
         }
+        footer{
+            position: absolute;
+            bottom: 0px;
+            font-size: 20px;
+        }
     </style>
     <body>
         <p style="font-size: 1.5em;font-weight: 100;"><u>Today's weather</u></p>
-        <h4 class="desc">desc</h4>
-        <h3 class="temp">Temp &degF</h3>
+        <h4 class="desc">description</h4>
+        <h3 class="temp">Temperature</h3>
         <p class="feelslike">feels like</p>
-        <p class="location">Timezone</p>
+        <p class="location">location</p>
 <script>
 console.log("hello");
 window.addEventListener("load", ()=>{
@@ -70,6 +75,8 @@ window.addEventListener("load", ()=>{
     console.log("after");
 });
 </script>
-
+<footer>
+    &copy Pulkit Sachdeva 2020
+    </footer>
 </body>
 </html>
