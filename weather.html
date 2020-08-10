@@ -1,0 +1,51 @@
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            background-image: linear-gradient(120deg,rgb(12, 112, 226), rgb(23, 130, 253), white);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: sans-serif;
+            font-size: 2em;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-weight: 100;
+        }p{
+            display: inline;
+        }
+    </style>
+    <body>
+        <p>icon</p>
+        <h4>desc</h4>
+        <h3>Temp &degF</h3>
+        <p>Timezone</p>
+<script>
+console.log("hello");
+window.addEventListener("load", ()=>{
+    let longitude;
+    let latitude;
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(position=>{
+            longitude=position.coords.longitude;
+            latitude=position.coords.latitude;
+
+            const proxy="https://cors.anywhere.herokuapp.com/";
+            const api=`${proxy}api.darksky.net/forecast/fd9d9c6418c23d94745b836767721ad1/${latitude},${longitude}`;
+            fetch(api)
+                .then(response=>{
+                    return response.json();
+                })
+        });
+    }
+
+    
+    
+});
+</script>
+
+</body>
+</html>
