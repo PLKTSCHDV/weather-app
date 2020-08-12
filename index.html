@@ -59,6 +59,10 @@ window.addEventListener("load", ()=>{
                     console.log(myJson/*.weather[0].main*/);
                     console.log(myJson.name);
                     description.textContent=myJson.weather[0].main;
+                    if(description.textContent==="Rain"||description.textContent==="Snow"){
+                        description.textContent="It might "+description.textContent;
+                    }
+                    
                     location.textContent=myJson.name+", "+myJson.sys.country;
                     let temp=myJson.main.temp-273.15;
                     t.textContent=Math.round(temp)+" C";
